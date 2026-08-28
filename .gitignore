@@ -1,0 +1,9 @@
+.nextflow/
+work/
+results/
+.conda/
+*.log
+.DS_Store
+__pycache__/
+*.pyc
+

@@ -1,0 +1,18 @@
+{
+  "dataset_accession": "GSE52778",
+  "design": "~ cell + dex",
+  "reference_level": "untrt",
+  "contrast": {
+    "factor": "dex",
+    "numerator": "trt",
+    "denominator": "untrt"
+  },
+  "low_count_filter": {
+    "rule": "rowSums(counts >= 10) >= 4",
+    "applied": true,
+    "genes_before": 63677,
+    "genes_after": 15100
+  },
+  "alpha": 0.05
+}
+
