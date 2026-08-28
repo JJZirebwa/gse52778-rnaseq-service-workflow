@@ -1,9 +1,10 @@
 .nextflow/
+.nextflow-home/
 work/
 results/
 .conda/
 *.log
+.nextflow.log*
 .DS_Store
 __pycache__/
 *.pyc
-
