@@ -111,7 +111,7 @@ process BUILD_HANDOFF_BUNDLE {
         path(session_info), \
         path(result_validation)
     path handover_document
-    path limitations_document
+    path interpretation_document
     path bundle_builder
 
     output:
@@ -137,7 +137,7 @@ process BUILD_HANDOFF_BUNDLE {
         ${session_info} \\
         ${result_validation} \\
         ${handover_document} \\
-        ${limitations_document}
+        ${interpretation_document}
     """
 }
 
@@ -149,10 +149,10 @@ workflow {
     analysis_script = file("${projectDir}/scripts/run_deseq2.R", checkIfExists: true)
     bundle_builder = file("${projectDir}/scripts/build_handoff.py", checkIfExists: true)
     handover_document = file("${projectDir}/docs/HANDOVER.md", checkIfExists: true)
-    limitations_document = file("${projectDir}/docs/LIMITATIONS.md", checkIfExists: true)
+    interpretation_document = file("${projectDir}/docs/INTERPRETATION.md", checkIfExists: true)
 
     intake = VALIDATE_SERVICE_INTAKE(samplesheet, intake_validator)
     analysis = RUN_DESEQ2_PAIRED(intake, analysis_script)
     verified = VERIFY_RESULTS(analysis, result_validator)
-    BUILD_HANDOFF_BUNDLE(verified, handover_document, limitations_document, bundle_builder)
+    BUILD_HANDOFF_BUNDLE(verified, handover_document, interpretation_document, bundle_builder)
 }

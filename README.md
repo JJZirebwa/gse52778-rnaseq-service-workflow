@@ -1,8 +1,8 @@
-# GSE52778 paired RNA-seq service workflow
+# GSE52778 paired RNA-seq workflow
 
 [![CI](https://github.com/JJZirebwa/gse52778-rnaseq-service-workflow/actions/workflows/ci.yml/badge.svg)](https://github.com/JJZirebwa/gse52778-rnaseq-service-workflow/actions/workflows/ci.yml)
 
-A compact, auditable service-style exercise for the eight processed-count samples in public bulk RNA-seq dataset GSE52778. Nextflow DSL2 orchestrates intake validation, a paired DESeq2 analysis, result-contract checks and a handoff bundle.
+I wanted to see what a small differential-expression request looks like when it runs as a repeatable workflow, from intake checks to a bundle someone else can pick up. This one takes the eight processed-count samples in GSE52778 (airway smooth muscle cells with and without dexamethasone), runs a paired DESeq2 analysis in Nextflow DSL2, checks the results against the contract below and packages them with a provenance manifest.
 
 ## Analysis contract
 
@@ -14,7 +14,7 @@ A compact, auditable service-style exercise for the eight processed-count sample
 - FDR table: Benjamini-Hochberg `padj <= 0.05`.
 - Sanity check: CRISPLD2 must have positive log2 fold-change for treated versus untreated.
 
-The workflow uses processed counts only. It makes no claim to raw FASTQ QC, alignment, quantification, production deployment, clinical validity or single-cell analysis.
+The workflow starts from processed counts, so there is no FASTQ QC or alignment step.
 
 ## Prerequisites and one-command run
 
@@ -61,9 +61,9 @@ sha256sum results-run-1/handoff/full_results.csv results-run-2/handoff/full_resu
 
 Both SHA-256 values must be identical. On macOS, use `shasum -a 256` in place of `sha256sum`.
 
-## Outputs and boundaries
+## Outputs
 
-See [the service handover](docs/HANDOVER.md) for the output inventory and [the limitations](docs/LIMITATIONS.md) before interpreting results. The provenance manifest hashes every key handoff file and records the dataset accession, Git commit, container references and software versions.
+[docs/HANDOVER.md](docs/HANDOVER.md) lists every output in the bundle, and [docs/INTERPRETATION.md](docs/INTERPRETATION.md) covers what to keep in mind when reading them. The provenance manifest hashes every key handoff file and records the dataset accession, Git commit, container references and software versions.
 
 ## Primary sources
 

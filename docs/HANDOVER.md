@@ -1,8 +1,8 @@
-# Service handover
+# Handover
 
 ## Question
 
-This exercise asks which genes differ between dexamethasone-treated and untreated airway smooth-muscle samples in public dataset GSE52778, while controlling for the four donor/cell-line pairs.
+Which genes differ between dexamethasone-treated and untreated airway smooth-muscle samples in public dataset GSE52778, after controlling for the four donor/cell-line pairs?
 
 ## Intake and design
 
@@ -24,14 +24,14 @@ This exercise asks which genes differ between dexamethasone-treated and untreate
 - `analysis_metadata.json` and `result_validation.json`: explicit model/filter contract and automated checks.
 - `sessionInfo.txt`: complete R session and loaded-package versions.
 - `provenance_manifest.json`: accession, commit, container references, software versions and SHA-256 hashes.
-- `LIMITATIONS.md`: interpretation boundaries.
+- `INTERPRETATION.md`: points to keep in mind when reading the results.
 - `nextflow/`: runtime report, timeline, trace and DAG when the launcher is used.
 
 ## Interpretation and sanity check
 
-The full table estimates the dexamethasone effect after accounting for cell-line differences. CRISPLD2 is required to have a positive log2 fold-change for the stated treated-versus-untreated contrast. That direction check can expose a reversed contrast or gross analysis error; it does not validate the entire model and is not evidence that one gene explains the biological response.
+The full table estimates the dexamethasone effect after accounting for cell-line differences. CRISPLD2 is required to have a positive log2 fold-change for the stated treated-versus-untreated contrast. That direction check catches a reversed contrast or a gross analysis error. It checks the plumbing and says nothing about whether one gene drives the response.
 
 ## Suggested next steps
 
-Review the QC plots and sample annotations before interpreting genes or pathways. For a real service request, agree the biological question and decision threshold with the requester, review influential samples and model diagnostics, then consider pathway-level summaries and an independent dataset. Any raw-read reprocessing would be a separately scoped analysis.
+Review the QC plots and sample annotations before interpreting genes or pathways. For a live request, agree the biological question and decision threshold with the requester, review influential samples and model diagnostics, then consider pathway-level summaries and an independent dataset. Any raw-read reprocessing would be a separately scoped analysis.
 
